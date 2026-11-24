@@ -8,6 +8,7 @@
 # ============================================================
 
 import importlib
+import logging
 import pkgutil
 import threading
 import time
@@ -52,6 +53,7 @@ class App:
                             and attr.__module__ == module.__name__):
                         found.append(attr())
             except Exception:
+                logging.exception("Could not load feature '%s'", mod_info.name)
                 print(f"[Could not load feature '{mod_info.name}']")
                 traceback.print_exc()
         found.sort(key=lambda f: f.priority)
@@ -73,6 +75,7 @@ class App:
                 if f.can_handle(t):
                     return f.handle(text, self)
             except Exception as e:
+                logging.exception("Feature '%s' failed on: %s", f.name, text)
                 return f"Oops, that feature hit a snag: {e}"
         return ("I didn't quite get that. Try:\n"
                 "  - a stock name, like: tata motors\n"
@@ -132,7 +135,10 @@ class App:
                     try:
                         f.tick(self)
                     except Exception:
-                        pass  # a background hiccup must never crash the app
+                        # A background hiccup must never crash the app, but
+                        # it should still be written to app.log for debugging.
+                        logging.exception("Background tick failed for '%s'",
+                                          f.name)
                 self._stop.wait(60)
         t = threading.Thread(target=loop, daemon=True)
         t.start()

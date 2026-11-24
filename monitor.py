@@ -7,12 +7,21 @@
 #  "pythonw.exe" task in Task Manager.
 # ============================================================
 
+import logging
+import os
 import time
 
 from core.app import App
 
 
 def main():
+    logging.basicConfig(
+        filename=os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "app.log"),
+        level=logging.INFO, encoding="utf-8",
+        format="%(asctime)s %(levelname)s %(message)s")
+    logging.info("Stock Buddy monitor started")
+
     app = App()
     app.start_background()
     print("Stock Buddy monitor is running. Alerts are active.", flush=True)
