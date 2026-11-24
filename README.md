@@ -15,6 +15,9 @@ Made for students and first-time investors. **No jargon. No paid data feed.**
 
 ![Stock Buddy screenshot](docs/screenshot.png)
 
+[▶ Watch the 22-second demo video](docs/demo.mp4) — silent, so it plays cleanly
+on GitHub and social feeds.
+
 ---
 
 ## Why this project exists
@@ -192,7 +195,10 @@ stock-buddy/
 ├── notifications/          # laptop, SMS, WhatsApp, Telegram
 ├── ui/gui.py               # Tkinter window
 ├── tests/                  # offline unit tests
-├── docs/screenshot.png
+├── docs/
+│   ├── screenshot.png      # real app screenshot
+│   ├── demo.mp4            # 22-second promo video
+│   └── make_video.py       # rebuilds the video from the screenshot
 └── requirements.txt
 ```
 
