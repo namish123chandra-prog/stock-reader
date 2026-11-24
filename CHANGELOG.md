@@ -4,6 +4,7 @@
 - New: **Chart** button and `chart reliance` command (text price chart)
 - New: **Help** button with the full beginner command list
 - New: offline unit tests and GitHub Actions CI
+- New: `python run.py --version` and `--help` command-line flags
 - New: README screenshot, badges, architecture guide and roadmap
 - New: issue templates, pull-request template, contributing and security docs
 - Improved: button order is now logical instead of routing priority

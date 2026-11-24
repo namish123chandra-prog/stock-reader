@@ -16,6 +16,19 @@ def main():
     except Exception:
         pass
 
+    from config import VERSION
+
+    if "--version" in sys.argv:
+        print(f"Stock Buddy v{VERSION}")
+        return
+    if "--help" in sys.argv:
+        print("Stock Buddy - simple Indian stock helper\n")
+        print("  python run.py           Open the desktop window")
+        print("  python run.py --text    Chat in the terminal")
+        print("  python run.py --version Show the version")
+        print("  python run.py --help    Show this message")
+        return
+
     logging.basicConfig(
         filename=os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "app.log"),

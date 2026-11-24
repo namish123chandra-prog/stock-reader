@@ -41,9 +41,19 @@ risk. It is a learning helper, not a trading terminal.
 
 ### Install
 
+**Option A — without Git:** open the repo, click **Code → Download ZIP**, extract
+it, then open a terminal in that folder.
+
+**Option B — with Git:**
+
 ```powershell
 git clone https://github.com/namish123chandra-prog/stock-reader.git
 cd stock-reader
+```
+
+Then install the dependencies:
+
+```powershell
 python -m pip install -r requirements.txt
 python check_setup.py
 ```
@@ -107,6 +117,9 @@ sell 2 reliance
 what is a dividend?
 help
 ```
+
+Small extra: the **Save Chat** link next to Send exports the conversation to a
+text file.
 
 The analysis is deliberately simple and explainable:
 
