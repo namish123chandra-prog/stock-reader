@@ -12,6 +12,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter.font import Font
 
+import config
 from core.app import App
 from core.persistence import BASE, read_json
 
@@ -39,7 +40,7 @@ CHIP_COLORS = {
     "Send Hi": TEAL, "Phone Chat Setup": PURPLE,
     "Watchlist": TEAL, "Price Targets": ORANGE, "Compare": BLUE,
     "SIP Calc": GREEN, "Close Report": PURPLE, "Backup": SKY,
-    "Theme": ORANGE, "Info": BLUE,
+    "Theme": ORANGE, "Info": BLUE, "Chart": TEAL, "Help": SKY,
 }
 FONT = "Segoe UI"
 
@@ -70,7 +71,7 @@ class BuddyGUI:
         self.C = palette  # short name for the colour palette
 
         self.root = tk.Tk()
-        self.root.title("Stock Buddy - Indian Stock Helper")
+        self.root.title(f"Stock Buddy v{config.VERSION} - Indian Stock Helper")
         self.root.geometry("850x720")
         self.root.minsize(700, 540)
         self.root.configure(bg=self.C["bg"])
@@ -114,7 +115,9 @@ class BuddyGUI:
         left.pack(side="left", padx=20, pady=12)
         tk.Label(left, text="STOCK BUDDY", font=(FONT, 19, "bold"),
                  fg=self.C["text"], bg=self.C["header"]).pack(anchor="w")
-        tk.Label(left, text="simple Indian stock helper  •  always watching",
+        tk.Label(left,
+                 text=f"v{config.VERSION}  •  simple Indian stock helper  •  "
+                      "always watching",
                  font=(FONT, 9), fg=self.C["muted"], bg=self.C["header"]
                  ).pack(anchor="w")
 
@@ -135,9 +138,12 @@ class BuddyGUI:
         grid = tk.Frame(area, bg=self.C["bg"])
         grid.pack(fill="x", pady=(4, 0))
         col = 0
-        for feature in self.app.features:
-            if not feature.button:
-                continue
+        ordered = sorted(
+            (f for f in self.app.features if f.button),
+            key=lambda f: (config.BUTTON_ORDER.index(f.button)
+                           if f.button in config.BUTTON_ORDER
+                           else len(config.BUTTON_ORDER), f.button))
+        for feature in ordered:
             color = CHIP_COLORS.get(feature.button, BLUE)
             chip = self._chip(grid, feature.button, color,
                               lambda f=feature: self._run_button(f))

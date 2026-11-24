@@ -8,14 +8,13 @@
 #  The button lets you check for big drops right now, any time.
 # ============================================================
 
-import datetime
 import time
 
 import config
 from core.feature import Feature
 from core import market, portfolio
 from core.analyze import pct
-from core.timeutils import market_open
+from core.timeutils import market_open, now_ist
 
 
 class DropAlerts(Feature):
@@ -43,7 +42,7 @@ class DropAlerts(Feature):
                  if m["change_pct"] <= -config.DROP_ALERT_PERCENT]
         drops.sort(key=lambda kv: kv[1]["change_pct"])
 
-        today = datetime.date.today()
+        today = now_ist().date()
         if self._alerted_date != today:
             self._alerted = set()
             self._alerted_date = today

@@ -6,11 +6,11 @@
 
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
-import datetime
 
 import requests
 
 from core.feature import Feature
+from core.timeutils import IST, now_ist
 
 FEEDS = [
     ("Economic Times", "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"),
@@ -51,12 +51,14 @@ class News(Feature):
             return ("I couldn't reach the news sites right now. "
                     "Check your internet and press News again.")
 
-        # Prefer today's news; keep the newest first.
-        today = datetime.date.today()
+        # Prefer today's news (India time); keep the newest first.
+        today = now_ist().date()
 
         def sort_key(it):
             when = it[2]
-            is_today = 0 if (when and when.date() == today) else 1
+            local_date = (when.astimezone(IST).date()
+                          if when and when.tzinfo else None)
+            is_today = 0 if local_date == today else 1
             stamp = when.timestamp() if when else 0
             return (is_today, -stamp)
 
@@ -70,7 +72,8 @@ class News(Feature):
 
         lines = ["TODAY'S STOCK MARKET NEWS", ""]
         for i, (title, source, when) in enumerate(unique[:12], 1):
-            time_str = when.strftime("%I:%M %p") if when else ""
+            local_when = when.astimezone(IST) if when and when.tzinfo else when
+            time_str = local_when.strftime("%I:%M %p") if local_when else ""
             lines.append(f"{i}. {title}")
             lines.append(f"   ({source}{' - ' + time_str if time_str else ''})")
         lines.append("")

@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.2.0 - 2026-11-24
+- New: **Chart** button and `chart reliance` command (text price chart)
+- New: **Help** button with the full beginner command list
+- New: offline unit tests and GitHub Actions CI
+- New: README screenshot, badges, architecture guide and roadmap
+- New: issue templates, pull-request template, contributing and security docs
+- Improved: button order is now logical instead of routing priority
+- Improved: daily review, drop-alert dates and news times use IST correctly
+- Improved: app window shows the version number
+- Fixed: command words like `chart` are no longer mistaken for stock tickers
+
 ## v1.1.0 - 2026-11-24
 - New: Watchlist manager (`watch` / `unwatch`)
 - New: Price target alerts with notifications

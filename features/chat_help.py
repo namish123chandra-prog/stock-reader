@@ -5,6 +5,7 @@
 #  any time - it's just a dictionary.
 # ============================================================
 
+import config
 from core.feature import Feature
 
 GLOSSARY = {
@@ -51,8 +52,11 @@ GLOSSARY = {
 
 class ChatHelp(Feature):
     name = "beginner friend"
-    button = None
+    button = "Help"
     priority = 15
+
+    def on_button(self, app):
+        return self._help_text(app)
 
     def can_handle(self, text):
         if text in ("help", "what can you do", "commands", "who are you"):
@@ -82,6 +86,9 @@ class ChatHelp(Feature):
 
     def _help_text(self, app):
         buttons = [f.button for f in app.features if f.button]
+        buttons.sort(key=lambda b: (config.BUTTON_ORDER.index(b)
+                                    if b in config.BUTTON_ORDER
+                                    else len(config.BUTTON_ORDER), b))
         return (
             "I'm Stock Buddy - your simple Indian stock market helper.\n"
             "\n"

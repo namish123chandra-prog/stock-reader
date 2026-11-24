@@ -3,7 +3,15 @@
 #  Everything you might want to change is in this one file.
 # ============================================================
 
-VERSION = "1.1.0"   # bump this when you add a feature
+VERSION = "1.2.0"   # bump this when you add a feature
+
+# Order of the buttons in the window. Add new button labels here.
+BUTTON_ORDER = [
+    "SOS", "News", "Today's Market", "My Stocks", "Best Stocks Today",
+    "Check a Stock", "Chart", "Compare", "Watchlist", "Price Targets",
+    "SIP Calc", "Close Report", "Check Big Drops", "Send Hi",
+    "Phone Chat Setup", "Backup", "Theme", "Info", "Help",
+]
 
 # Your phone number (used for drop alerts). Add YOUR number when you set up
 # SMS/WhatsApp/Telegram. Left blank here so this file is safe to publish.

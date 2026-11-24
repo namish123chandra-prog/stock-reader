@@ -1,117 +1,271 @@
-# Stock Buddy 🇮🇳
+# Stock Reader / Stock Buddy 🇮🇳
+
+[![CI](https://github.com/namish123chandra-prog/stock-reader/actions/workflows/ci.yml/badge.svg)](https://github.com/namish123chandra-prog/stock-reader/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows&logoColor=white)](#requirements)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue)](CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/namish123chandra-prog/stock-reader?style=social)](https://github.com/namish123chandra-prog/stock-reader/stargazers)
 
 A beginner-friendly **Indian stock market assistant** for the desktop.
-It doesn't just chat — it fetches real NSE prices, watches your stocks,
-sends alerts, remembers what you bought, and messages your phone.
+It fetches live NSE prices, explains them in plain English, remembers what you
+bought, watches for big drops, and can alert your phone.
 
-**Version:** 1.1.0  •  **Made for:** students and first-time investors
-**Language:** plain English, no jargon
+Made for students and first-time investors. **No jargon. No paid data feed.**
+
+![Stock Buddy screenshot](docs/screenshot.png)
 
 ---
 
-## Run it
+## Why this project exists
 
-Double-click **`Start Stock Buddy.bat`** (or `python run.py`).
+Most stock apps throw charts, ratios and jargon at you. Stock Buddy does the
+opposite: it gives you a simple answer, explains *why*, and reminds you about
+risk. It is a learning helper, not a trading terminal.
 
-First time on a new PC:
+- **India-first:** NSE stocks, rupees, IST market hours.
+- **Plain English:** BUY / WAIT / AVOID with reasons and precautions.
+- **Actually useful:** live prices, news, watchlists, price alerts, portfolio memory.
+- **Easy to extend:** every feature is one small file in `features/`.
+- **No cloud account needed:** runs on your laptop.
 
-```
+---
+
+## Quick start
+
+### Requirements
+
+- Windows 10 or 11
+- Python 3.9 or newer
+- Internet connection for prices and news
+
+### Install
+
+```powershell
+git clone https://github.com/namish123chandra-prog/stock-reader.git
+cd stock-reader
 python -m pip install -r requirements.txt
+python check_setup.py
 ```
 
-Check everything is installed: `python check_setup.py`
+### Run
+
+Double-click **`Start Stock Buddy.bat`**, or run:
+
+```powershell
+python run.py
+```
+
+Prefer a terminal instead of the window?
+
+```powershell
+python run.py --text
+```
 
 ---
 
-## What it can do (18 buttons + chat)
+## What it can do
 
-| Button / message | What it does |
+### 19 buttons, plus chat
+
+| Button | What it does |
 |---|---|
 | **SOS** | Sends an urgent snapshot of your stocks to your phone channels |
-| **News** | Today's market headlines (Economic Times, Moneycontrol, LiveMint) |
-| **Today's Market** | Green/red day, biggest winners & losers |
-| **My Stocks** | Your saved stocks + profit/loss vs what you paid |
-| **Best Stocks Today** | Scores India's 50 biggest companies, shows top 5 |
-| **Check a Stock** | BUY / WAIT / SELL, risk, precautions, no jargon |
-| **Check Big Drops** | Anything that fell 4%+ today |
-| **Send Hi** | Pushes "Hi!" to your phone channels |
-| **Phone Chat Setup** | Steps for the free Telegram bot (chat from your phone) |
-| **Watchlist** | `watch zomato` / `unwatch zomato` / `my watchlist` |
-| **Price Targets** | `alert me if tcs goes above 4500` → notification when crossed |
-| **Compare** | `compare reliance vs tcs` → simple side-by-side |
-| **SIP Calc** | `5000 per month for 10 years at 12%` → savings growth maths |
-| **Close Report** | End-of-day summary, also auto-sent at 3:35 PM IST |
+| **News** | Today's Indian market headlines from ET, Moneycontrol and LiveMint |
+| **Today's Market** | Green/red day, Nifty move, biggest winners and losers |
+| **My Stocks** | Your saved stocks, profit/loss, and a daily review |
+| **Best Stocks Today** | Scores Nifty 50 companies and shows the top 5 |
+| **Check a Stock** | Price, simple story, BUY/WAIT/AVOID, risk and precautions |
+| **Chart** | A tiny text chart of the last 30 trading days |
+| **Compare** | Side-by-side check of two stocks |
+| **Watchlist** | Add or remove stocks you want watched |
+| **Price Targets** | Alert when a stock crosses a price you choose |
+| **SIP Calc** | See how monthly savings could grow over time |
+| **Close Report** | End-of-day summary, also sent automatically at 3:35 PM IST |
+| **Check Big Drops** | Anything in the watchlist down 4%+ today |
+| **Send Hi** | Sends a test "Hi!" to your phone channels |
+| **Phone Chat Setup** | Free Telegram bot setup for two-way chat |
 | **Backup** | Creates a dated ZIP of the whole app in `backups/` |
-| **Theme** | Dark/light window theme (saved) |
-| **Info** | Version, settings, and all file locations |
-| **Save Chat** (in app) | Exports the conversation to a text file |
-| `I bought 5 reliance at 1350` | Remembers your stock; daily 9 AM report card |
-| `sell 2 reliance` | Updates your saved holding |
-| `what is a dividend?` | Mini-dictionary (35+ plain-English terms) |
-| `help` | Full command list |
+| **Theme** | Switch between dark and light mode |
+| **Info** | Version, settings and file locations |
+| **Help** | Full command list, written for beginners |
 
-### Always-on mode ✅
+### Chat examples
 
-Double-click **`Turn On Always-On.bat`** once. The app then starts silently
-at every Windows logon and keeps watching — no window needed. It sends
-big-drop alerts, price-target hits, the 9 AM review and the 3:35 PM close
-report. It uses correct **IST** time regardless of your PC's timezone.
-Needs the laptop on and logged in. Stop with **`Turn Off Always-On.bat`**.
+```text
+reliance
+should I buy tata motors?
+chart infosys
+compare reliance vs tcs
+watch zomato
+unwatch zomato
+alert me if tcs goes above 4500
+my alerts
+I bought 5 reliance at 1350
+sell 2 reliance
+5000 per month for 10 years at 12%
+what is a dividend?
+help
+```
 
-### Phone notifications
+The analysis is deliberately simple and explainable:
 
-Nothing needed for laptop popups + sound + `alerts_log.txt`. For your phone:
+- Is the price above its 50-day average?
+- Did it gain or lose a lot this month?
+- Is it near its yearly high or far below it?
+- Is it unusually jumpy?
+- Did it crash today?
 
-- **Telegram (easiest, free):** message @BotFather → `/newbot` → paste the
-  token in `config.py` → restart → message your bot once. Two-way chat works:
-  ask it *"how are my stocks going?"* from anywhere.
-- **SMS:** free account at fast2sms.com → API key in `config.py`
-- **WhatsApp:** free Twilio trial → SID, token and sandbox number in `config.py`
-
----
-
-## Files (all in the stock-buddy folder)
-
-| File | What's in it |
-|---|---|
-| `config.py` | Settings, phone number, keys, stock list |
-| `portfolio.json` | The stocks you own |
-| `watchlist.json` | Stocks you added to watch |
-| `targets.json` | Your price alerts |
-| `theme.json` | Dark/light choice |
-| `alerts_log.txt` | Alert history |
-| `app.log` | Startup/error log |
-| `backups/` | Dated ZIP backups |
-| `features/` | One file per feature — the plug-in system |
-| `notifications/` | Laptop, SMS, WhatsApp, Telegram channels |
-
-### Adding a feature (no old code changes)
-
-1. Copy `features/_template.py` → `features/my_feature.py`
-2. Fill in `can_handle`, `handle`, and optionally `button` and `tick`
-3. Restart — the app finds it and adds its button automatically
-
-New notification channels: add a file in `notifications/` with a
-`send(title, message)` method, then add it in `core/app.py`.
+Those checks produce a score, a plain-English verdict, a risk level, and
+precautions. **It is not a prediction and not financial advice.**
 
 ---
 
-## Publishing / sharing safely
+## Always-on mode
 
-- **Remove your API keys** from `config.py` before sharing the code. Keys in
-  `SMS_API_KEY`, `TWILIO_*` and `TELEGRAM_BOT_TOKEN` are yours.
-- `config.py` also has your phone number — change or blank it before sharing.
-- `.gitignore` already excludes personal JSON files, logs and backups.
-- Press **Backup** (or `python -c "from features.backup import create_backup; print(create_backup())"`)
-  before making big changes.
-- MIT licence included — you may share and modify this project.
+Double-click **`Turn On Always-On.bat`** once. Stock Buddy will start silently
+when you log in to Windows and keep watching in the background:
 
-## Honest notes
+- big-drop alerts
+- price-target hits
+- 9:00 AM portfolio review
+- 3:35 PM market close report
 
-- Learning helper, **not financial advice**. BUY/WAIT/SELL is a simple price
-  check — nobody can promise a stock will rise.
-- Free prices can be ~15 minutes delayed. Not for same-day trading.
-- Watches India's 50 biggest companies by default; any NSE stock can be
-  asked about by name.
-- If silent monitor and the window both run, alerts can appear twice.
-- If you're in school, involve a parent/guardian before investing real money.
+Stop it with **`Turn Off Always-On.bat`**. The laptop must be on and logged in.
+Market hours and report times use **India Standard Time (IST)**, even if your PC
+is set to another timezone.
+
+> Don't run the window and the silent monitor together for long, or you may get
+> duplicate alerts.
+
+---
+
+## Phone notifications (optional)
+
+Laptop popups, sound and `alerts_log.txt` work with no setup. For phone alerts,
+choose any of these:
+
+| Channel | Setup | Good for |
+|---|---|---|
+| **Telegram** (recommended) | Message `@BotFather` → `/newbot` → paste token into `config.py` | Free two-way chat from your phone |
+| **SMS** | Create a Fast2SMS account → paste API key into `config.py` | Simple text alerts |
+| **WhatsApp** | Twilio trial → SID, token and sandbox number into `config.py` | WhatsApp alerts |
+
+Keys and phone numbers live in `config.py`. They are **blank by default** so the
+repo is safe to share.
+
+---
+
+## How it works
+
+```text
+stock-buddy/
+├── run.py                  # start the desktop app or text mode
+├── monitor.py              # silent always-on watcher
+├── config.py               # settings, phone keys, watchlist
+├── core/
+│   ├── app.py              # plug-in loader + chat routing
+│   ├── market.py           # yfinance prices, NSE symbols, caching
+│   ├── analyze.py          # simple scoring and verdicts
+│   ├── portfolio.py        # your saved stocks
+│   ├── persistence.py      # tiny JSON file helper
+│   └── timeutils.py        # IST market hours
+├── features/               # one file per feature (the plug-in system)
+│   ├── _template.py        # copy this to add a feature
+│   ├── chart.py
+│   ├── stock_check.py
+│   ├── watchlist.py
+│   └── ...
+├── notifications/          # laptop, SMS, WhatsApp, Telegram
+├── ui/gui.py               # Tkinter window
+├── tests/                  # offline unit tests
+├── docs/screenshot.png
+└── requirements.txt
+```
+
+### Add a feature without changing old code
+
+1. Copy `features/_template.py` to `features/my_feature.py`.
+2. Fill in `can_handle`, `handle`, and optionally `button`, `priority`, `tick`.
+3. Restart the app. The loader finds it and adds its button automatically.
+
+```python
+from core.feature import Feature
+
+
+class MyFeature(Feature):
+    name = "my feature"
+    button = "My Feature"
+    priority = 50
+
+    def can_handle(self, text):
+        return "my feature" in text
+
+    def handle(self, text, app):
+        return "Hello from my new feature!"
+```
+
+---
+
+## Tests
+
+The test suite runs offline and does not need real prices:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+GitHub Actions runs the same tests, plus a compile check, on every push and
+pull request.
+
+---
+
+## Roadmap
+
+- [x] Live NSE prices and plain-English analysis
+- [x] Portfolio memory and daily review
+- [x] Big-drop alerts and price targets
+- [x] Watchlist, comparison, SIP calculator
+- [x] Text charts and Help button
+- [x] Tests + CI
+- [ ] One-click `.exe` build for Windows
+- [ ] Telegram setup wizard inside the app
+- [ ] Hindi / regional-language explanations
+- [ ] Offline mode with the last saved prices
+
+Have an idea? Open an issue using the templates in `.github/ISSUE_TEMPLATE/`.
+
+---
+
+## Contributing
+
+Contributions are welcome, especially:
+
+- clearer wording for beginners
+- bug reports with the exact message you typed
+- new NSE name aliases
+- tests for features
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) first. Never commit API keys,
+phone numbers, `portfolio.json`, `alerts_log.txt` or backups.
+
+---
+
+## Safety and honesty
+
+- **Learning helper, not financial advice.** BUY/WAIT/AVOID is a simple price
+  check, not a promise.
+- Free prices can be **~15 minutes delayed**. Do not use this for same-day
+  trading.
+- Markets can fall. Never invest money you need soon.
+- If you are in school, talk to a parent or guardian before investing real money.
+- Report security issues privately as described in [SECURITY.md](SECURITY.md).
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE). You may use, modify and share it.
+
+Built as a first open-source project, with a lot of help from AI. ⭐ Star the repo
+if it helped you learn something.

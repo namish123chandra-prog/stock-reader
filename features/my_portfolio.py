@@ -4,13 +4,13 @@
 #  watches those stocks, and sends you a review every morning.
 # ============================================================
 
-import datetime
 import re
 
 import config
 from core.feature import Feature
 from core import market, portfolio
 from core.analyze import money
+from core.timeutils import now_ist
 
 
 def _find_symbol(text):
@@ -111,8 +111,8 @@ class MyPortfolio(Feature):
         return portfolio.review_text()
 
     def tick(self, app):
-        """Send the daily review once a day, at DAILY_REVIEW_TIME."""
-        now = datetime.datetime.now()
+        """Send the daily review once a day, at DAILY_REVIEW_TIME IST."""
+        now = now_ist()
         today = now.strftime("%Y-%m-%d")
         if now.strftime("%H:%M") < config.DAILY_REVIEW_TIME:
             return

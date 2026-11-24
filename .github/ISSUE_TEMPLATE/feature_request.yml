@@ -1,0 +1,51 @@
+name: Feature request
+description: Suggest a new button, command, or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep it beginner-friendly: explain the idea as if the user has never
+        bought a stock before.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: I want to know how much I would need to save each month...
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      placeholder: Add a "Goal Planner" button where I type a target amount...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of the app?
+      options:
+        - Stock analysis
+        - Alerts and phone notifications
+        - Portfolio / watchlist
+        - News
+        - Learning / explanations
+        - User interface
+        - Developer / plug-in system
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example command or button
+      placeholder: "goal 100000 in 2 years"
+  - type: checkboxes
+    id: beginner
+    attributes:
+      label: Beginner check
+      options:
+        - label: This can be explained without financial jargon.
+          required: true

@@ -1,0 +1,54 @@
+name: Bug report
+description: Something is broken or gives a confusing answer
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Stock Buddy. Please do not paste phone
+        numbers, API keys, or your `portfolio.json` contents.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem in your own words.
+      placeholder: I typed "chart tcs" and got...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      placeholder: I expected a chart of TCS prices.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the app
+        2. Click Chart
+        3. Type ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Stock Buddy version
+      description: Find it in the title bar or with the Info button.
+      placeholder: v1.2.0
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.4"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output or screenshot
+      description: Paste any error text, or drag in a screenshot. Remove personal data first.
+      render: text

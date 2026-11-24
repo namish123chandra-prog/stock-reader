@@ -25,9 +25,11 @@ check("Python 3.9 or newer", sys.version_info >= (3, 9), sys.version)
 for lib in ("yfinance", "pandas", "requests"):
     check(f"{lib} installed", importlib.util.find_spec(lib) is not None,
           "run: python -m pip install -r requirements.txt")
-for folder in ("core", "features", "notifications", "ui"):
+for folder in ("core", "features", "notifications", "ui", "tests", "docs"):
     check(f"{folder}/ folder", os.path.isdir(folder))
-for file in ("run.py", "config.py", "README.md", "LICENSE"):
+for file in ("run.py", "config.py", "README.md", "LICENSE",
+             "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md",
+             "docs/screenshot.png"):
     check(file, os.path.isfile(file))
 check("always-on launcher installed",
       os.path.exists(os.path.join(os.environ.get("APPDATA", ""), "Microsoft",
