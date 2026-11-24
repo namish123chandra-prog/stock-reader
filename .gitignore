@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+backups/
+*.zip
+alerts_log.txt
+app.log
+portfolio.json
+watchlist.json
+targets.json
+theme.json
+close_report_date.json
+telegram_chat.json
+chat_export_*.txt
